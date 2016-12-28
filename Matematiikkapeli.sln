@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{AE54CBAD-7B2D-661D-76F5-06D8C56E447F}") = "Matematiikkapeli", "Assembly-CSharp.csproj", "{AA87523E-2462-AC4D-EF04-DF3DB3B59E2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA87523E-2462-AC4D-EF04-DF3DB3B59E2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA87523E-2462-AC4D-EF04-DF3DB3B59E2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA87523E-2462-AC4D-EF04-DF3DB3B59E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA87523E-2462-AC4D-EF04-DF3DB3B59E2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
