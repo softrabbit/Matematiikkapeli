@@ -35,6 +35,8 @@ public class UpdateTimer : MonoBehaviour {
 	public void startTimer (float t) {
 		timeLeft = t;
 		running = true;
-		Debug.Log (running);
+	}
+	public void stopTimer() {
+		running = false;
 	}
 }

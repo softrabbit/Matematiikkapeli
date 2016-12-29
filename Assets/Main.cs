@@ -5,17 +5,18 @@ using UnityEngine;
 public class Main : MonoBehaviour {
 	int score = 0;
 	int lives = 3;
-	float period = 15.0f;
+	float period = 10.0f;
 	UpdateTimer updTime;
-	int[] numbers = new int[3];				// Numerot
-	int answer;				// Oikea vastaus
-	int unknown;			// Missä kohtaa on tuntematon
-	char oper; 				// Laskutoimitus valikoimasta + - * / ja 
+	int[] numbers = new int[3];	// Numerot
+	int answer;					// Oikea vastaus
+	int unknown;				// Missä kohtaa on tuntematon (enimmäkseen 2)
+	char oper; 					// Laskutoimitus valikoimasta + - * / 
 
 	// Use this for initialization
 	void Start () {
 		updTime = GameObject.Find ("Timer Text").GetComponent<UpdateTimer> ();
 		updTime.startTimer (period);
+		shuffle ();
 	}
 	
 	// Update is called once per frame
@@ -38,7 +39,7 @@ public class Main : MonoBehaviour {
 				numbers [0] += 10;
 			}
 			oper = '-';
-			numbers [2] = numbers [0] + numbers [1];
+			numbers [2] = numbers [0] - numbers [1];
 			break;
 		case 2:
 			numbers [2] = numbers [0] * numbers [1];
@@ -50,9 +51,10 @@ public class Main : MonoBehaviour {
 			oper = '/';
 			break;
 		}
-		// Viides operaatio: yhtälön ratkaisu tulee 20% todennäköisyydellä
+		// Viides operaatio: yhtälön ratkaisu, tulee 20% todennäköisyydellä 
 		tmp = Random.Range (0, 10);
-		unknown = tmp > 1 ? 2 : tmp;
+		unknown = (tmp > 1) ? 2 : tmp;
+		Debug.Log (numbers [0] + " " + numbers [1] + " " + numbers [2] + " " + unknown + " " + oper);
 	}
 	// Palauttaa numeron tietystä indeksistä stringinä UI:ta varten
 	public string getNumStr(int n) {
@@ -67,10 +69,22 @@ public class Main : MonoBehaviour {
 		return oper.ToString();
 	}
 
-
+	public void guess(int g) {
+		if(g == numbers[unknown] ) {
+			// Oikein
+			score++;
+			shuffle();	
+			period = .99f * period; // Lisätään vaikeusastetta vähän kerrallaan lyhentämällä aikaa 1%
+			updTime.startTimer (period);	
+		} else {
+			// Ei rangaista vääristä vastauksista...
+		}	
+	}
 
 	public void gameOver() {
+		updTime.stopTimer();
 		Debug.Log ("GameOver");
+
 	}
 
 	public int getScore() {
@@ -84,8 +98,9 @@ public class Main : MonoBehaviour {
 	public void timeout() {
 		lives--;
 		if (lives == 0) {				
+			// Viimeinen elämä käytetty
 			gameOver ();
-		} else {
+		} else {						
 			shuffle ();
 			updTime.startTimer (period);
 		}
