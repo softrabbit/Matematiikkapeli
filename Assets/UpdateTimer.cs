@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Ajastinluokka
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,15 +11,14 @@ public class UpdateTimer : MonoBehaviour {
 	bool running = false;
 	Main godObject;
 
-	// Use this for initialization
 	void Start () {
 		timer = GetComponent<UnityEngine.UI.Text>();
 		timeLeft = 10;
 		godObject = GameObject.Find ("GodObject").GetComponent<Main> ();
 	}
 	
-	// Update is called once per frame
 	void Update () {
+		// Vähennetään aikaa jos ajastin on käynnissä
 		if (running) {
 			timeLeft -= Time.deltaTime;
 			if (timeLeft < 5) {
@@ -25,13 +26,14 @@ public class UpdateTimer : MonoBehaviour {
 			} else {
 				timer.text = string.Format ("{0:n2}", timeLeft);
 			}		
+			// Ja kun aika loppuu kerrotaan pelilogiikalle
 			if (timeLeft < 0) {
 				godObject.timeout ();
 			}	
 		}
 	}
 
-
+	// Käynnistää ajastimen ja asettaa siihen t sekuntia
 	public void startTimer (float t) {
 		timeLeft = t;
 		running = true;
